@@ -1,6 +1,7 @@
 using Doppler.BillingUser.Encryption;
 using Doppler.BillingUser.Enums;
 using Doppler.BillingUser.ExternalServices.E4;
+using Doppler.BillingUser.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -31,10 +32,12 @@ namespace Doppler.BillingUser.ExternalServices.FirstData
 
         private readonly IEncryptionService _encryptionService;
         private readonly ILogger _logger;
+        private readonly IEmailTemplatesService _emailTemplatesService;
 
         public PaymentGateway(IEncryptionService encryptionService,
             IFirstDataService config,
-            ILogger<PaymentGateway> logger)
+            ILogger<PaymentGateway> logger,
+            IEmailTemplatesService emailTemplatesService)
         {
             if (config == null)
             {
@@ -53,7 +56,7 @@ namespace Doppler.BillingUser.ExternalServices.FirstData
             _orderService.Endpoint.Name = _isDemo ? "ServiceSoapDemo" : "ServiceSoap";
             _orderService.Endpoint.Address = _isDemo ? new EndpointAddress(config.GetFirstDataServiceSoapDemo()) : new EndpointAddress(config.GetFirstDataServiceSoap());
             _orderService.ChannelFactory.Endpoint.EndpointBehaviors.Add(new HmacHeaderBehavior(_hmac, _keyId));
-
+            _emailTemplatesService = emailTemplatesService;
             _logger = logger;
         }
 
@@ -99,6 +102,11 @@ namespace Doppler.BillingUser.ExternalServices.FirstData
 
                     _logger.LogError(String.Format("First Data Error: Client Id: {0}, CVDCode: {1}, CVD_Presence_Ind: {2}", clientId, txn.CVDCode, txn.CVD_Presence_Ind));
                     _logger.LogError(String.Format("Response: CVV: {0}, ErrorCode:{1}, ErrorMessage: {2}", apiResponse.CVV2, errorCode, errorMessage));
+
+                    if (txn.Transaction_Type != TransactionTypes.REFUND)
+                    {
+                        await _emailTemplatesService.SendNotificationForFailedCreditCardTransaction(clientId, errorCode.ToString(), errorMessage, apiResponse.CTR, apiResponse.Bank_Message);
+                    }
 
                     throw new DopplerApplicationException(errorCode, errorMessage);
                 }
@@ -149,7 +157,7 @@ namespace Doppler.BillingUser.ExternalServices.FirstData
                     case PaymentErrorCode.DuplicatedPaymentTransaction:
                     case PaymentErrorCode.FraudPaymentTransaction:
                     case PaymentErrorCode.DoNotHonorPaymentResponse:
-                        return false;
+                        throw ex;
                     default:
                         throw;
                 }

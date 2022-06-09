@@ -207,20 +207,30 @@ namespace Doppler.BillingUser.Controllers
         [HttpPut("/accounts/{accountname}/payment-methods/current")]
         public async Task<IActionResult> UpdateCurrentPaymentMethod(string accountname, [FromBody] PaymentMethod paymentMethod)
         {
-            _logger.LogDebug("Update current payment method.");
-
-            User userInformation = await _userRepository.GetUserInformation(accountname);
-            var isSuccess = await _billingRepository.UpdateCurrentPaymentMethod(userInformation, paymentMethod);
-
-            if (!isSuccess)
+            try
             {
-                var messageError = $"Failed at updating payment method for user {accountname}";
-                _logger.LogError(messageError);
-                await _slackService.SendNotification(messageError);
-                return new BadRequestObjectResult("Failed at updating payment");
-            }
+                _logger.LogDebug("Update current payment method.");
 
-            return new OkObjectResult("Successfully");
+                User userInformation = await _userRepository.GetUserInformation(accountname);
+                var isSuccess = await _billingRepository.UpdateCurrentPaymentMethod(userInformation, paymentMethod);
+
+                if (!isSuccess)
+                {
+                    var messageError = $"Failed at updating payment method for user {accountname}";
+                    _logger.LogError(messageError);
+                    await _slackService.SendNotification(messageError);
+                    return new BadRequestObjectResult("Failed at updating payment");
+                }
+
+                return new OkObjectResult("Successfully");
+            }
+            catch (DopplerApplicationException e)
+            {
+                var messageError = $"Failed at updating payment method for user {accountname} with exception {e.Message}";
+                _logger.LogError(e, messageError);
+                await _slackService.SendNotification(messageError);
+                return new BadRequestObjectResult(e.Message);
+            }
         }
 
         [Authorize(Policies.OWN_RESOURCE_OR_SUPERUSER)]
@@ -305,14 +315,15 @@ namespace Doppler.BillingUser.Controllers
                     return new BadRequestObjectResult("Invalid selected plan type");
                 }
 
-                var isValidTotal = await _accountPlansService.IsValidTotal(accountname, agreementInformation);
-                if (!isValidTotal)
-                {
-                    var messageError = $"Failed at creating new agreement for user {accountname}, Total of agreement is not valid";
-                    _logger.LogError(messageError);
-                    await _slackService.SendNotification(messageError);
-                    return new BadRequestObjectResult("Total of agreement is not valid");
-                }
+                //TODO: Check the current error
+                //var isValidTotal = await _accountPlansService.IsValidTotal(accountname, agreementInformation);
+                //if (!isValidTotal)
+                //{
+                //    var messageError = $"Failed at creating new agreement for user {accountname}, Total of agreement is not valid";
+                //    _logger.LogError(messageError);
+                //    await _slackService.SendNotification(messageError);
+                //    return new BadRequestObjectResult("Total of agreement is not valid");
+                //}
 
                 Promotion promotion = null;
                 if (!string.IsNullOrEmpty(agreementInformation.Promocode))
@@ -344,6 +355,7 @@ namespace Doppler.BillingUser.Controllers
 
                     if (payment.Status == PaymentStatusEnum.Approved)
                     {
+                        authorizationNumber = payment.AuthorizationNumber;
                         var accountEntyMapper = GetAccountingEntryMapper(user.PaymentMethod);
                         AccountingEntry invoiceEntry = await accountEntyMapper.MapToInvoiceAccountingEntry(agreementInformation.Total.Value, user, newPlan, payment);
                         AccountingEntry paymentEntry = await accountEntyMapper.MapToPaymentAccountingEntry(invoiceEntry, encryptedCreditCard);
@@ -392,7 +404,7 @@ namespace Doppler.BillingUser.Controllers
 
                 if (agreementInformation.Total.GetValueOrDefault() > 0 &&
                     ((user.PaymentMethod == PaymentMethodEnum.CC) ||
-                    (user.PaymentMethod == PaymentMethodEnum.MP) ||
+                    (user.PaymentMethod == PaymentMethodEnum.MP && payment.Status == PaymentStatusEnum.Approved) ||
                     (user.PaymentMethod == PaymentMethodEnum.TRANSF && user.IdBillingCountry == (int)CountryEnum.Argentina)))
                 {
                     var billingCredit = await _billingRepository.GetBillingCredit(billingCreditId);
@@ -499,9 +511,24 @@ namespace Doppler.BillingUser.Controllers
                 await _slackService.SendNotification(messageError);
                 return new ObjectResult($"Failed at creating new agreement: {e.Message}")
                 {
-                    StatusCode = 500
+                    StatusCode = 500,
+                    Value = e.Message,
                 };
             }
+        }
+
+        [Authorize(Policies.OWN_RESOURCE_OR_SUPERUSER)]
+        [HttpPut("/accounts/{accountname}/purchase-intention")]
+        public async Task<IActionResult> UpdateLastPurchaseIntentionDate(string accountname)
+        {
+            var result = await _userRepository.UpdateUserPurchaseIntentionDate(accountname);
+
+            if (result.Equals(0))
+            {
+                return new BadRequestObjectResult("Failed updating purchase intention. Invalid account.");
+            }
+
+            return new OkObjectResult("Successfully");
         }
 
         private async void SendNotifications(string accountname, UserTypePlanInformation newPlan, UserBillingInformation user, int partialBalance, Promotion promotion, string promocode, int discountId, CreditCardPayment payment)

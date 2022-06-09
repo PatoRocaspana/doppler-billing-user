@@ -22,7 +22,7 @@ namespace Doppler.BillingUser.Mappers
                 IdClient = user.IdUser,
                 Amount = total,
                 Date = DateTime.UtcNow,
-                Status = payment.Status.ToString(),
+                Status = payment.Status,
                 Source = SourceTypeHelper.SourceTypeEnumMapper(newPlan),
                 AccountingTypeDescription = AccountingEntryTypeDescriptionInvoice,
                 InvoiceNumber = 0,

@@ -32,7 +32,7 @@ namespace Doppler.BillingUser.Test
     public class BillingControllerTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> factory;
-        const string TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.E3RHjKx9p0a-64RN2YPtlEMysGM45QBO9eATLBhtP4tUQNZnkraUr56hAWA-FuGmhiuMptnKNk_dU3VnbyL6SbHrMWUbquxWjyoqsd7stFs1K_nW6XIzsTjh8Bg6hB5hmsSV-M5_hPS24JwJaCdMQeWrh6cIEp2Sjft7I1V4HQrgzrkMh15sDFAw3i1_ZZasQsDYKyYbO9Jp7lx42ognPrz_KuvPzLjEXvBBNTFsVXUE-ur5adLNMvt-uXzcJ1rcwhjHWItUf5YvgRQbbBnd9f-LsJIhfkDgCJcvZmGDZrtlCKaU1UjHv5c3faZED-cjL59MbibofhPjv87MK8hhdg";
+        const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.C4shc2SZqolHSpxSLU3GykR0A0Zyh0fofqNirS3CmeY4ZerofgRry7m9AMFyn1SG-rmLDpFJIObFA2dn7nN6uKf5gCTEIwGAB71LfAeVaEfOeF1SvLJh3-qGXknqinsrX8tuBhoaHmpWpvdp0PW-8PmLuBq-D4GWBGyrP73sx_qQi322E2_PJGfudygbahdQ9v4SnBh7AOlaLKSXhGRT-qsMCxZJXpHM7cZsaBkOlo8x_LEWbbkf7Ub6q3mWaQsR30NlJVTaRMY9xWrRMV_iZocREg2EI33mMBa5zhuyQ-hXENp5M9FgS_9B-j3LpFJoJyVFZG2beBRxU8tnqKan3A";
 
         public BillingControllerTest(WebApplicationFactory<Startup> factory)
         {
@@ -47,7 +47,7 @@ namespace Doppler.BillingUser.Test
             {
                 Language = "es",
                 FirstName = "TestName",
-                Email = "test1@test.com"
+                Email = "test1@example.com"
             };
 
             var currentPaymentMethod = new PaymentMethod
@@ -66,18 +66,18 @@ namespace Doppler.BillingUser.Test
                 .Setup(x => x.GetUserCurrentTypePlan(It.IsAny<int>()))
                 .ReturnsAsync(null as UserTypePlanInformation);
             userRepository
-                .Setup(x => x.GetUserBillingInformation("test1@test.com"))
+                .Setup(x => x.GetUserBillingInformation("test1@example.com"))
                 .ReturnsAsync(new UserBillingInformation() { Email = user.Email, PaymentMethod = PaymentMethodEnum.CC });
             userRepository
                 .Setup(x => x.GetUserNewTypePlan(1))
                 .ReturnsAsync(new UserTypePlanInformation { IdUserType = UserTypeEnum.SUBSCRIBERS });
             userRepository
-                .Setup(x => x.GetUserInformation("test1@test.com"))
+                .Setup(x => x.GetUserInformation("test1@example.com"))
                 .ReturnsAsync(user);
 
             var accountPlanService = new Mock<IAccountPlansService>();
             accountPlanService
-                .Setup(x => x.IsValidTotal("test1@test.com", It.IsAny<AgreementInformation>()))
+                .Setup(x => x.IsValidTotal("test1@example.com", It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
 
             var billingCreditId = 1;
@@ -150,9 +150,9 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "/accounts/test1@test.com/agreements")
+            var request = new HttpRequestMessage(HttpMethod.Post, "/accounts/test1@example.com/agreements")
             {
-                Headers = { { "Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518}" } },
+                Headers = { { "Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}" } },
                 Content = JsonContent.Create(new AgreementInformation()
                 {
                     OriginInbound = "test",

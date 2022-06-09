@@ -23,7 +23,7 @@ namespace Doppler.BillingUser.Test
     public class PutInvoiceRecipientsTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
-        private const string TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.E3RHjKx9p0a-64RN2YPtlEMysGM45QBO9eATLBhtP4tUQNZnkraUr56hAWA-FuGmhiuMptnKNk_dU3VnbyL6SbHrMWUbquxWjyoqsd7stFs1K_nW6XIzsTjh8Bg6hB5hmsSV-M5_hPS24JwJaCdMQeWrh6cIEp2Sjft7I1V4HQrgzrkMh15sDFAw3i1_ZZasQsDYKyYbO9Jp7lx42ognPrz_KuvPzLjEXvBBNTFsVXUE-ur5adLNMvt-uXzcJ1rcwhjHWItUf5YvgRQbbBnd9f-LsJIhfkDgCJcvZmGDZrtlCKaU1UjHv5c3faZED-cjL59MbibofhPjv87MK8hhdg";
+        private const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.C4shc2SZqolHSpxSLU3GykR0A0Zyh0fofqNirS3CmeY4ZerofgRry7m9AMFyn1SG-rmLDpFJIObFA2dn7nN6uKf5gCTEIwGAB71LfAeVaEfOeF1SvLJh3-qGXknqinsrX8tuBhoaHmpWpvdp0PW-8PmLuBq-D4GWBGyrP73sx_qQi322E2_PJGfudygbahdQ9v4SnBh7AOlaLKSXhGRT-qsMCxZJXpHM7cZsaBkOlo8x_LEWbbkf7Ub6q3mWaQsR30NlJVTaRMY9xWrRMV_iZocREg2EI33mMBa5zhuyQ-hXENp5M9FgS_9B-j3LpFJoJyVFZG2beBRxU8tnqKan3A";
 
         public PutInvoiceRecipientsTest(WebApplicationFactory<Startup> factory)
         {
@@ -36,7 +36,7 @@ namespace Doppler.BillingUser.Test
             // Arrange
             var user = new User
             {
-                BillingEmails = "test@mail.com, test2@mail.com"
+                BillingEmails = "test@example.com, test2@example.com"
             };
 
             var mockConnection = new Mock<DbConnection>();
@@ -55,14 +55,14 @@ namespace Doppler.BillingUser.Test
             {
                 Recipients = new[]
                 {
-                    "test@mail.com",
-                    "test2@mail.com"
+                    "test@example.com",
+                    "test2@example.com"
                 }
             };
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
 
             // Act
-            var response = await client.PutAsJsonAsync("accounts/test1@test.com/billing-information/invoice-recipients", billingEmailRecipients);
+            var response = await client.PutAsJsonAsync("accounts/test1@example.com/billing-information/invoice-recipients", billingEmailRecipients);
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -74,8 +74,8 @@ namespace Doppler.BillingUser.Test
             // Arrange
             var user = new User
             {
-                Email = "test@mail.com",
-                BillingEmails = "test@mail.com, test2@mail.com",
+                Email = "test@example.com",
+                BillingEmails = "test@example.com, test2@example.com",
                 SapProperties = "{\"ContractCurrency\" : false,\"GovernmentAccount\" : false,\"Premium\" : false,\"Plus\" : false,\"ComercialPartner\" : false,\"MarketingPartner\" : false,\"OnBoarding\" : false,\"Layout\" : false,\"Datahub\" : false,\"PushNotification\" : false,\"ExclusiveIp\" : false,\"Advisory\" : false,\"Reports\" : false,\"SMS\" : false}",
                 IdResponsabileBilling = (int)ResponsabileBillingEnum.QBL
             };
@@ -98,15 +98,15 @@ namespace Doppler.BillingUser.Test
             {
                 Recipients = new[]
                 {
-                    "test@mail.com",
-                    "test2@mail.com"
+                    "test@example.com",
+                    "test2@example.com"
                 }
             };
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
             var httpTest = new HttpTest();
 
             // Act
-            var response = await client.PutAsJsonAsync("accounts/test1@test.com/billing-information/invoice-recipients", billingEmailRecipients);
+            var response = await client.PutAsJsonAsync("accounts/test1@example.com/billing-information/invoice-recipients", billingEmailRecipients);
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -119,8 +119,8 @@ namespace Doppler.BillingUser.Test
             // Arrange
             var user = new User
             {
-                Email = "test@mail.com",
-                BillingEmails = "test@mail.com, test2@mail.com",
+                Email = "test@example.com",
+                BillingEmails = "test@example.com, test2@example.com",
                 SapProperties =
                     "{\"ContractCurrency\" : false,\"GovernmentAccount\" : false,\"Premium\" : false,\"Plus\" : false,\"ComercialPartner\" : false,\"MarketingPartner\" : false,\"OnBoarding\" : false,\"Layout\" : false,\"Datahub\" : false,\"PushNotification\" : false,\"ExclusiveIp\" : false,\"Advisory\" : false,\"Reports\" : false,\"SMS\" : false}",
                 IdResponsabileBilling = (int)ResponsabileBillingEnum.GBBISIDE
@@ -146,16 +146,16 @@ namespace Doppler.BillingUser.Test
             {
                 Recipients = new[]
                 {
-                    "test@mail.com",
-                    "test2@mail.com"
+                    "test@example.com",
+                    "test2@example.com"
                 }
             };
             client.DefaultRequestHeaders.Add("Authorization",
-                $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518}");
+                $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
 
             // Act
             using var httpTest = new HttpTest();
-            var response = await client.PutAsJsonAsync("accounts/test1@test.com/billing-information/invoice-recipients", billingEmailRecipients);
+            var response = await client.PutAsJsonAsync("accounts/test1@example.com/billing-information/invoice-recipients", billingEmailRecipients);
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -168,7 +168,7 @@ namespace Doppler.BillingUser.Test
             // Arrange
             var user = new User
             {
-                BillingEmails = "test@mail.com, test2@mail.com",
+                BillingEmails = "test@example.com, test2@example.com",
                 SapProperties = "{\"ContractCurrency\" : false,\"GovernmentAccount\" : false,\"Premium\" : false,\"Plus\" : false,\"ComercialPartner\" : false,\"MarketingPartner\" : false,\"OnBoarding\" : false,\"Layout\" : false,\"Datahub\" : false,\"PushNotification\" : false,\"ExclusiveIp\" : false,\"Advisory\" : false,\"Reports\" : false,\"SMS\" : false}",
                 IdResponsabileBilling = (int)ResponsabileBillingEnum.GB
             };
@@ -188,14 +188,14 @@ namespace Doppler.BillingUser.Test
 
             var billingEmailRecipients = new
             {
-                Recipients = new[] { "test@mail.com", "test2@mail.com" }
+                Recipients = new[] { "test@example.com", "test2@example.com" }
             };
 
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
             using var httpTest = new HttpTest();
 
             // Act
-            var response = await client.PutAsJsonAsync("accounts/test1@test.com/billing-information/invoice-recipients", billingEmailRecipients);
+            var response = await client.PutAsJsonAsync("accounts/test1@example.com/billing-information/invoice-recipients", billingEmailRecipients);
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);

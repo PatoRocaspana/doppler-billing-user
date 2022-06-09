@@ -47,9 +47,9 @@ namespace Doppler.BillingUser.Infrastructure
         }
         public async Task<BillingInformation> GetBillingInformation(string email)
         {
-            using (IDbConnection connection = _connectionFactory.GetConnection())
-            {
-                var results = await connection.QueryAsync<BillingInformation>(@"
+            using var connection = _connectionFactory.GetConnection();
+
+            var results = await connection.QueryAsync<BillingInformation>(@"
 SELECT
     U.BillingFirstName AS Firstname,
     U.BillingLastName AS Lastname,
@@ -65,9 +65,8 @@ FROM
     LEFT JOIN [Country] CO ON S.IdCountry = CO.IdCountry
 WHERE
     U.Email = @email",
-                    new { email });
-                return results.FirstOrDefault();
-            }
+                new { email });
+            return results.FirstOrDefault();
         }
 
         public async Task UpdateBillingInformation(string accountName, BillingInformation billingInformation)
@@ -585,7 +584,7 @@ WHERE
 
         public async Task<int> CreateBillingCreditAsync(BillingCreditAgreement buyCreditAgreement)
         {
-            var connection = _connectionFactory.GetConnection();
+            using var connection = _connectionFactory.GetConnection();
             var result = await connection.QueryFirstOrDefaultAsync<int>(@"
 INSERT INTO [dbo].[BillingCredits]
     ([Date],
@@ -736,7 +735,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT)",
                 conceptEnglish = "Monthly Emails Accreditation: " + date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en"));
             }
 
-            var connection = _connectionFactory.GetConnection();
+            using var connection = _connectionFactory.GetConnection();
             var result = await connection.QueryAsync<int>(@"
 INSERT INTO [dbo].[MovementsCredits]
     ([IdUser],
@@ -806,6 +805,38 @@ WHERE
             return billingCredit;
         }
 
+        public async Task<AccountingEntry> GetInvoice(int idClient, string authorizationNumber)
+        {
+            using var connection = _connectionFactory.GetConnection();
+            var invoice = await connection.QueryFirstOrDefaultAsync<AccountingEntry>(@"
+SELECT
+    AE.[IdAccountingEntry],
+    AE.[Date],
+    AE.[Amount],
+    AE.[Status],
+    AE.[Source],
+    AE.[AuthorizationNumber],
+    AE.[InvoiceNumber],
+    AE.[AccountEntryType],
+    AE.[AccountingTypeDescription],
+    AE.[IdClient],
+    AE.[IdAccountType],
+    AE.[IdInvoiceBillingType],
+    AE.[IdCurrencyType],
+    AE.[CurrencyRate],
+    AE.[Taxes]
+FROM
+    [dbo].[AccountingEntry] AE
+WHERE
+    idClient = @idClient AND authorizationNumber = @authorizationNumber",
+                new
+                {
+                    @idClient = idClient,
+                    @authorizationNumber = authorizationNumber
+                });
+            return invoice;
+        }
+
         public async Task<PlanDiscountInformation> GetPlanDiscountInformation(int discountId)
         {
             using var connection = _connectionFactory.GetConnection();
@@ -849,7 +880,7 @@ WHERE
 
         public async Task<int> CreateAccountingEntriesAsync(AccountingEntry invoiceEntry, AccountingEntry paymentEntry)
         {
-            var connection = _connectionFactory.GetConnection();
+            using var connection = _connectionFactory.GetConnection();
             var invoiceId = await connection.QueryFirstOrDefaultAsync<int>(@"
 INSERT INTO [dbo].[AccountingEntry]
     ([Date],
@@ -888,7 +919,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT)",
                 @idClient = invoiceEntry.IdClient,
                 @amount = invoiceEntry.Amount,
                 @date = invoiceEntry.Date,
-                @status = invoiceEntry.Status,
+                @status = invoiceEntry.Status.ToString(),
                 @source = invoiceEntry.Source,
                 @accountingTypeDescription = invoiceEntry.AccountingTypeDescription,
                 @invoiceNumber = 0,
@@ -960,13 +991,98 @@ SELECT CAST(SCOPE_IDENTITY() AS INT)",
                     @accountEntryType = paymentEntry.AccountEntryType,
                     @authorizationNumber = paymentEntry.AuthorizationNumber,
                     @paymentEntryType = paymentEntry.PaymentEntryType,
-                    @idCurrencyType = invoiceEntry.IdCurrencyType,
-                    @currencyRate = invoiceEntry.CurrencyRate,
-                    @taxes = invoiceEntry.Taxes
+                    @idCurrencyType = paymentEntry.IdCurrencyType,
+                    @currencyRate = paymentEntry.CurrencyRate,
+                    @taxes = paymentEntry.Taxes
                 });
             }
 
             return invoiceId;
+        }
+
+        public async Task<int> CreatePaymentEntryAsync(int invoiceId, AccountingEntry paymentEntry)
+        {
+            using var connection = _connectionFactory.GetConnection();
+            var IdAccountingEntry = await connection.QueryFirstOrDefaultAsync<int>(@"
+INSERT INTO [dbo].[AccountingEntry]
+    ([IdClient],
+    [IdInvoice],
+    [Amount],
+    [CCNumber],
+    [CCExpMonth],
+    [CCExpYear],
+    [CCHolderName],
+    [Date],
+    [Source],
+    [AccountingTypeDescription],
+    [IdAccountType],
+    [IdInvoiceBillingType],
+    [AccountEntryType],
+    [AuthorizationNumber],
+    [PaymentEntryType],
+    [IdCurrencyType],
+    [CurrencyRate],
+    [Taxes])
+VALUES
+    (@idClient,
+    @idInvoice,
+    @amount,
+    @ccCNumber,
+    @ccExpMonth,
+    @ccExpYear,
+    @ccHolderName,
+    @date,
+    @source,
+    @accountingTypeDescription,
+    @idAccountType,
+    @idInvoiceBillingType,
+    @accountEntryType,
+    @authorizationNumber,
+    @paymentEntryType,
+    @idCurrencyType,
+    @currencyRate,
+    @taxes);
+SELECT CAST(SCOPE_IDENTITY() AS INT)",
+            new
+            {
+                @idClient = paymentEntry.IdClient,
+                @idInvoice = invoiceId,
+                @amount = paymentEntry.Amount,
+                @ccCNumber = paymentEntry.CcCNumber,
+                @ccExpMonth = paymentEntry.CcExpMonth,
+                @ccExpYear = paymentEntry.CcExpYear,
+                @ccHolderName = paymentEntry.CcHolderName,
+                @date = paymentEntry.Date,
+                @source = paymentEntry.Source,
+                @accountingTypeDescription = paymentEntry.AccountingTypeDescription,
+                @idAccountType = paymentEntry.IdAccountType,
+                @idInvoiceBillingType = paymentEntry.IdInvoiceBillingType,
+                @accountEntryType = paymentEntry.AccountEntryType,
+                @authorizationNumber = paymentEntry.AuthorizationNumber,
+                @paymentEntryType = paymentEntry.PaymentEntryType,
+                @idCurrencyType = paymentEntry.IdCurrencyType,
+                @currencyRate = paymentEntry.CurrencyRate,
+                @taxes = paymentEntry.Taxes
+            });
+
+            return IdAccountingEntry;
+        }
+
+        public async Task UpdateInvoiceStatus(int id, PaymentStatusEnum status)
+        {
+            using var connection = _connectionFactory.GetConnection();
+            await connection.ExecuteAsync(@"
+UPDATE
+    [dbo].[AccountingEntry]
+SET
+    Status = @Status
+WHERE
+    IdAccountingEntry = @Id;",
+            new
+            {
+                @Id = id,
+                @Status = status.ToString(),
+            });
         }
 
         private int CalculateBillingSystemByTransfer(int idBillingCountry)

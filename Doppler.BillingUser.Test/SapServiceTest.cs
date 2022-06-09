@@ -21,7 +21,7 @@ namespace Doppler.BillingUser.Test
             var businessPartner = new SapBusinessPartner
             {
                 Id = 1,
-                Email = "test1@test.com"
+                Email = "test1@example.com"
             };
 
             var service = new SapService(
@@ -41,7 +41,7 @@ namespace Doppler.BillingUser.Test
                 .WithVerb(HttpMethod.Post)
                 .WithRequestBody("{\"Id\":1,\"IsClientManager\":false,\"FirstName\":null," +
                                 "\"LastName\":null,\"BillingAddress\":null,\"CityName\":null,\"StateId\":null," +
-                                "\"CountryCode\":null,\"Address\":null,\"ZipCode\":null,\"Email\":\"test1@test.com\"," +
+                                "\"CountryCode\":null,\"Address\":null,\"ZipCode\":null,\"Email\":\"test1@example.com\"," +
                                 "\"PhoneNumber\":null,\"FederalTaxId\":null,\"FederalTaxType\":\"CUIT\",\"IdConsumerType\":0," +
                                 "\"GroupCode\":0,\"BillingEmails\":null,\"Cancelated\":false,\"SapProperties\":null," +
                                 "\"Blocked\":false,\"IsInbound\":null,\"BillingZip\":null,\"BillingStateId\":null," +

@@ -57,8 +57,12 @@ FROM
     [dbo].[UserTypesPlans] UTP
     ON
     BC.IdUserTypePlan = UTP.IdUserTypePlan
+INNER JOIN
+    [dbo].[User] U
+    ON
+    U.[IdUser] = BC.[IdUser]
 WHERE
-    BC.[IdUser] = @idUser
+    BC.[IdUser] = @idUser AND U.UpgradePending IS NOT NULL
 ORDER BY
     BC.[Date] DESC;",
                 new
@@ -118,7 +122,7 @@ WHERE
 
         public async Task<int> UpdateUserBillingCredit(UserBillingInformation user)
         {
-            var connection = _connectionFactory.GetConnection();
+            using var connection = _connectionFactory.GetConnection();
             var result = await connection.ExecuteAsync(@"
 UPDATE
     [dbo].[User]
@@ -209,6 +213,25 @@ WHERE
                 });
 
             return user;
+        }
+
+        public async Task<int> UpdateUserPurchaseIntentionDate(string accountName)
+        {
+            using var connection = _connectionFactory.GetConnection();
+            var result = await connection.ExecuteAsync(@"
+UPDATE
+    [dbo].[User]
+SET
+    LastPurchaseIntentionDate = @date
+WHERE
+    Email = @accountName;",
+            new
+            {
+                accountName,
+                @date = DateTime.UtcNow
+            });
+
+            return result;
         }
     }
 }

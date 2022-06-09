@@ -217,6 +217,41 @@ namespace Doppler.BillingUser.Services
 
             return Task.WhenAll(creditsEmail, adminEmail);
         }
+
+        public Task SendNotificationForFailedCreditCardTransaction(int userId, string errorCode, string errorMessage, string transactionCTR, string bankMessage)
+        {
+            var template = _emailSettings.Value.FailedCreditCardFreeUserPurchaseNotificationAdminTemplateId;
+
+            return _emailSender.SafeSendWithTemplateAsync(
+                    templateId: template,
+                    templateModel: new
+                    {
+                        urlImagesBase = _emailSettings.Value.UrlEmailImagesBase,
+                        userId,
+                        errorCode,
+                        errorMessage,
+                        transactionCTR,
+                        bankMessage,
+                        year = DateTime.UtcNow.Year
+                    },
+                    to: new[] { _emailSettings.Value.CommercialEmail, _emailSettings.Value.BillingEmail });
+        }
+
+        public Task SendNotificationForMercadoPagoPaymentApproved(int userId, string accountname)
+        {
+            var template = _emailSettings.Value.MercadoPagoPaymentApprovedAdminTemplateId;
+
+            return _emailSender.SafeSendWithTemplateAsync(
+                    templateId: template,
+                    templateModel: new
+                    {
+                        urlImagesBase = _emailSettings.Value.UrlEmailImagesBase,
+                        userId,
+                        email = accountname,
+                        year = DateTime.UtcNow.Year
+                    },
+                    to: new[] { _emailSettings.Value.AdminEmail });
+        }
     }
 }
 

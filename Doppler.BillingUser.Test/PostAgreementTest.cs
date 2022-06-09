@@ -30,8 +30,8 @@ namespace Doppler.BillingUser.Test
 {
     public class PostAgreementTest : IClassFixture<WebApplicationFactory<Startup>>
     {
-        private const string TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.E3RHjKx9p0a-64RN2YPtlEMysGM45QBO9eATLBhtP4tUQNZnkraUr56hAWA-FuGmhiuMptnKNk_dU3VnbyL6SbHrMWUbquxWjyoqsd7stFs1K_nW6XIzsTjh8Bg6hB5hmsSV-M5_hPS24JwJaCdMQeWrh6cIEp2Sjft7I1V4HQrgzrkMh15sDFAw3i1_ZZasQsDYKyYbO9Jp7lx42ognPrz_KuvPzLjEXvBBNTFsVXUE-ur5adLNMvt-uXzcJ1rcwhjHWItUf5YvgRQbbBnd9f-LsJIhfkDgCJcvZmGDZrtlCKaU1UjHv5c3faZED-cjL59MbibofhPjv87MK8hhdg";
-        private const string TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20010908 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoxMDAwMDAwMDAwfQ.JBmiZBgKVSUtB4_NhD1kiUhBTnH2ufGSzcoCwC3-Gtx0QDvkFjy2KbxIU9asscenSdzziTOZN6IfFx6KgZ3_a3YB7vdCgfSINQwrAK0_6Owa-BQuNAIsKk-pNoIhJ-OcckV-zrp5wWai3Ak5Qzg3aZ1NKZQKZt5ICZmsFZcWu_4pzS-xsGPcj5gSr3Iybt61iBnetrkrEbjtVZg-3xzKr0nmMMqe-qqeknozIFy2YWAObmTkrN4sZ3AB_jzqyFPXN-nMw3a0NxIdJyetbESAOcNnPLymBKZEZmX2psKuXwJxxekvgK9egkfv2EjKYF9atpH5XwC0Pd4EWvraLAL2eg";
+        private const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.C4shc2SZqolHSpxSLU3GykR0A0Zyh0fofqNirS3CmeY4ZerofgRry7m9AMFyn1SG-rmLDpFJIObFA2dn7nN6uKf5gCTEIwGAB71LfAeVaEfOeF1SvLJh3-qGXknqinsrX8tuBhoaHmpWpvdp0PW-8PmLuBq-D4GWBGyrP73sx_qQi322E2_PJGfudygbahdQ9v4SnBh7AOlaLKSXhGRT-qsMCxZJXpHM7cZsaBkOlo8x_LEWbbkf7Ub6q3mWaQsR30NlJVTaRMY9xWrRMV_iZocREg2EI33mMBa5zhuyQ-hXENp5M9FgS_9B-j3LpFJoJyVFZG2beBRxU8tnqKan3A";
+        private const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoxMDAwMDAwMDAwfQ.Ite0xcvR2yLyFuVSBpoXeyJiwW44rYGJPGSX6VH_mCHImovvHMlcqJZkJLFy7A7jdUWJRZy23E_7tBR_rSEz9DBisiVksPeNqjuM3auUSZkPrRIYz16RZzLahhVNF-101j4Hg0Q7ZJB4zcT2a9qgB00CtSejUKrLoVljGj6mUz-ejVY7mNvUs0EE6e3pq4sylz9HHw0wZMBkv29xj_iE_3jBGwAwifh2UMQuBP_TAo6IiMaCMxmbPdITNEmQfXXIG3yPw6KwRjDw_EWR_R6yWFhbXuLONsZQF6b9mfokW9PxQ5MNCgvXihWCYaAibJ62R3N0pyUuvpjOJfifwFFaRA";
         private readonly WebApplicationFactory<Startup> _factory;
 
         public PostAgreementTest(WebApplicationFactory<Startup> factory)
@@ -50,7 +50,7 @@ namespace Doppler.BillingUser.Test
                 PlanId = 3
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(It.IsAny<string>(), It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(false);
@@ -72,7 +72,7 @@ namespace Doppler.BillingUser.Test
                     services.AddSingleton(userRepositoryMock.Object);
                 });
             }).CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
 
             // Act
             var response = await client.PostAsJsonAsync($"accounts/{accountName}/agreements", agreement);
@@ -110,7 +110,7 @@ namespace Doppler.BillingUser.Test
             };
 
             var authorizatioNumber = "LLLTD222";
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -168,7 +168,7 @@ namespace Doppler.BillingUser.Test
                     services.AddSingleton(emailSenderMock.Object);
                 });
             }).CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
 
             // Act
             var response = await client.PostAsJsonAsync($"accounts/{accountName}/agreements", agreement);
@@ -178,7 +178,7 @@ namespace Doppler.BillingUser.Test
         }
 
         [Theory]
-        [InlineData(TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20010908)]
+        [InlineData(TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908)]
         [InlineData("")]
         [InlineData("invalid")]
         public async Task POST_agreement_should_return_unauthorized_When_token_is_invalid(string token)
@@ -188,7 +188,7 @@ namespace Doppler.BillingUser.Test
             {
                 AllowAutoRedirect = false
             });
-            var request = new HttpRequestMessage(HttpMethod.Post, "accounts/test1@test.com/agreements")
+            var request = new HttpRequestMessage(HttpMethod.Post, "accounts/test1@example.com/agreements")
             {
                 Headers = { { "Authorization", $"Bearer {token}" } }
             };
@@ -206,7 +206,7 @@ namespace Doppler.BillingUser.Test
             // Arrange
             var client = _factory.CreateClient(new WebApplicationFactoryClientOptions());
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "accounts/test1@test.com/agreements");
+            var request = new HttpRequestMessage(HttpMethod.Post, "accounts/test1@example.com/agreements");
 
             // Act
             var response = await client.SendAsync(request);
@@ -228,10 +228,10 @@ namespace Doppler.BillingUser.Test
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(new { }));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(new { }));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -255,7 +255,7 @@ namespace Doppler.BillingUser.Test
                 CCNumber = "411111111111"
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -354,7 +354,7 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
             var response = await client.PostAsync($"accounts/{accountName}/agreements", JsonContent.Create(agreement));
@@ -386,10 +386,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -423,10 +423,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -448,7 +448,7 @@ namespace Doppler.BillingUser.Test
                 total = 15
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -471,10 +471,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -494,10 +494,10 @@ namespace Doppler.BillingUser.Test
                 });
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(new { planId }));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(new { planId }));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -521,7 +521,7 @@ namespace Doppler.BillingUser.Test
                 CCNumber = "411111111111"
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -574,7 +574,7 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
             var response = await client.PostAsync($"accounts/{accountName}/agreements", JsonContent.Create(agreement));
@@ -617,10 +617,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
@@ -680,10 +680,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
@@ -746,10 +746,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
@@ -771,7 +771,7 @@ namespace Doppler.BillingUser.Test
                 total = 15
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -795,10 +795,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -820,7 +820,7 @@ namespace Doppler.BillingUser.Test
                 total = 15
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -841,10 +841,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -868,7 +868,7 @@ namespace Doppler.BillingUser.Test
                 CCNumber = "411111111111"
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -921,7 +921,7 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
             var response = await client.PostAsync($"accounts/{accountName}/agreements", JsonContent.Create(agreement));
@@ -935,7 +935,7 @@ namespace Doppler.BillingUser.Test
         public async void POST_agreement_should_return_ok_when_promocode_is_null()
         {
             // Arrange
-            const string accountName = "test1@test.com";
+            const string accountName = "test1@example.com";
             var agreement = new
             {
                 planId = 1,
@@ -1008,7 +1008,7 @@ namespace Doppler.BillingUser.Test
             });
             factory.Server.PreserveExecutionContext = true;
             var client = factory.CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
             var httpTest = new HttpTest();
             httpTest.RespondWithJson(new { Total = 2 });
 
@@ -1023,7 +1023,7 @@ namespace Doppler.BillingUser.Test
         public async void POST_agreement_should_return_internal_server_error_when_promocode_is_invalid()
         {
             // Arrange
-            const string accountName = "test1@test.com";
+            const string accountName = "test1@example.com";
             var agreement = new
             {
                 planId = 1,
@@ -1056,7 +1056,7 @@ namespace Doppler.BillingUser.Test
             });
             factory.Server.PreserveExecutionContext = true;
             var client = factory.CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
             var httpTest = new HttpTest();
             httpTest.RespondWithJson(new { Total = 2 });
             httpTest.RespondWith(status: 500);
@@ -1072,7 +1072,7 @@ namespace Doppler.BillingUser.Test
         public async void POST_agreement_should_return_ok_when_promocode_is_valid()
         {
             // Arrange
-            const string accountName = "test1@test.com";
+            const string accountName = "test1@example.com";
             var agreement = new
             {
                 planId = 1,
@@ -1135,7 +1135,7 @@ namespace Doppler.BillingUser.Test
                 });
             });
             var client = factory.CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
             var response = await client.PostAsJsonAsync($"accounts/{accountName}/agreements", agreement);
@@ -1148,7 +1148,7 @@ namespace Doppler.BillingUser.Test
         public async void POST_agreement_should_increment_times_to_use_of_promocode_when_agreement_is_accomplished()
         {
             // Arrange
-            const string accountName = "test1@test.com";
+            const string accountName = "test1@example.com";
             var agreement = new
             {
                 planId = 1,
@@ -1212,7 +1212,7 @@ namespace Doppler.BillingUser.Test
                 });
             });
             var client = factory.CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
             var response = await client.PostAsJsonAsync($"accounts/{accountName}/agreements", agreement);
@@ -1281,11 +1281,11 @@ namespace Doppler.BillingUser.Test
             });
             factory.Server.PreserveExecutionContext = true;
             var client = factory.CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
             var httpTest = new HttpTest();
 
             // Act
-            var response = await client.PostAsJsonAsync("accounts/test1@test.com/agreements", agreement);
+            var response = await client.PostAsJsonAsync("accounts/test1@example.com/agreements", agreement);
 
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
@@ -1312,7 +1312,7 @@ namespace Doppler.BillingUser.Test
                 CCNumber = "411111111111"
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -1409,7 +1409,7 @@ namespace Doppler.BillingUser.Test
 
             factory.Server.PreserveExecutionContext = true;
             var client = factory.CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
             var httpTest = new HttpTest();
 
             // Act
@@ -1452,7 +1452,7 @@ namespace Doppler.BillingUser.Test
             };
 
             var authorizatioNumber = "LLLTD222";
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -1516,7 +1516,7 @@ namespace Doppler.BillingUser.Test
                     services.AddSingleton(emailSenderMock.Object);
                 });
             }).CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
 
             // Act
             var response = await client.PostAsJsonAsync($"accounts/{accountName}/agreements", agreement);
@@ -1580,7 +1580,7 @@ namespace Doppler.BillingUser.Test
                 CCNumber = "411111111111"
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -1639,7 +1639,7 @@ namespace Doppler.BillingUser.Test
                     services.AddSingleton(emailSenderMock.Object);
                 });
             }).CreateClient(new WebApplicationFactoryClientOptions());
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518}");
 
             // Act
             var response = await client.PostAsJsonAsync($"accounts/{accountName}/agreements", agreement);
@@ -1666,7 +1666,7 @@ namespace Doppler.BillingUser.Test
                 total = 15
             };
 
-            var accountName = "test1@test.com";
+            var accountName = "test1@example.com";
             var accountPlansServiceMock = new Mock<IAccountPlansService>();
             accountPlansServiceMock.Setup(x => x.IsValidTotal(accountName, It.IsAny<AgreementInformation>()))
                 .ReturnsAsync(true);
@@ -1687,10 +1687,10 @@ namespace Doppler.BillingUser.Test
 
             }).CreateClient(new WebApplicationFactoryClientOptions());
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT123_TEST1_AT_TEST_DOT_COM_EXPIRE20330518);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518);
 
             // Act
-            var response = await client.PostAsync("accounts/test1@test.com/agreements", JsonContent.Create(agreement));
+            var response = await client.PostAsync("accounts/test1@example.com/agreements", JsonContent.Create(agreement));
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

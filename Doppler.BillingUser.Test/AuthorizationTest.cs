@@ -41,9 +41,9 @@ namespace Doppler.BillingUser.Test
         const string TOKEN_SUPERUSER_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1NVIjp0cnVlLCJleHAiOjIwMDAwMDAwMDB9.rUtvRqMxrnQzVHDuAjgWa2GJAJwZ-wpaxqdjwP7gmVa7XJ1pEmvdTMBdirKL5BJIE7j2_hsMvEOKUKVjWUY-IE0e0u7c82TH0l_4zsIztRyHMKtt9QE9rBRQnJf8dcT5PnLiWkV_qEkpiIKQ-wcMZ1m7vQJ0auEPZyyFBKmU2caxkZZOZ8Kw_1dx-7lGUdOsUYad-1Rt-iuETGAFijQrWggcm3kV_KmVe8utznshv2bAdLJWydbsAUEfNof0kZK5Wu9A80DJd3CRiNk8mWjQxF_qPOrGCANOIYofhB13yuYi48_8zVPYku-llDQjF77BmQIIIMrCXs8IMT3Lksdxuw";
         const string TOKEN_SUPERUSER_EXPIRE_20010908 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1NVIjp0cnVlLCJleHAiOjEwMDAwMDAwMDB9.FYOpOxrXSHDif3lbQLPEStMllzEktWPKQ2T4vKUq5qgVjiH_ki0W0Ansvt0PMlaLHqq7OOL9XGFebtgUcyU6aXPO9cZuq6Od196TWDLMdnxZ-Ct0NxWxulyMbjTglUiI3V6g3htcM5EaurGvfu66kbNDuHO-WIQRYFfJtbm7EuOP7vYBZ26hf5Vk5KvGtCWha4zRM55i1-CKMhXvhPN_lypn6JLENzJGYHkBC9Cx2DwzaT683NWtXiVzeMJq3ohC6jvRpkezv89QRes2xUW4fRgvgRGQvaeQ4huNW_TwQKTTikH2Jg7iHbuRqqwYuPZiWuRkjqfd8_80EdlSAnO94Q";
         const string TOKEN_SUPERUSER_FALSE_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1NVIjpmYWxzZSwiZXhwIjoyMDAwMDAwMDAwfQ.qMY3h8VhNxuOBciqrmXpTrRk8ElwDlT_3CYFzqJdXNjnJhKihFVMwjkWVw1EEckCWbKsRoBr-NgRV0SZ0JKWbMr2oGhZJWtqmKA05d8-i_MuuYbxtt--NUoQxg6AsMX989PGf6fSBzo_4szb7J0G6nUvvRxXfMnHMpaIAQUiBLNOoeKwnzsZFfI1ehmYGNmtc-2XyXOEHAnfZeBZw8uMWOp4A5hFBpVsaVCUiRirokjeCMWViVWT9NnVWbA60e_kfLjghEcXWaZfNnX9qtj4OC8QUB33ByUmwuYlTxNnu-qiEaJmbaaTeDD2JrKHf6MR59MlCHbb6BDWt20DBy73WQ";
-        const string TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjo0MDAwMDAwMDAwfQ.Xm7dzdoK2MMGm9UmoHhuMID68LbYJi1Rk1NWl2BliGuzvVwVnNP3bvx3cHvylHa_xNVTAZDLzzyoLZCZSffWUUBdcSHJbXPdX42JZiLCE7AlWTfM85n4M84-5xmWWVEMY8KGwIKLJoE3EHWrRuv0AkO3ysWasoYhg3XQGVwxcw-sglM1eoo7TAiCxivgclLtTRfJZQ0_n3KkWGsTBJmfpHY2fMX1Mzr3RuBIr5Spwoni0dFRMQB8ilMlNl6GMuLPPRH2kjtzyk68U02_HniHdaABlblkJLRWHk6IOczajkvKJntdWsX_mbXHgNW49oaIy1CxR4Zh0XdrGjcMegLKkQ";
-        const string TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.E3RHjKx9p0a-64RN2YPtlEMysGM45QBO9eATLBhtP4tUQNZnkraUr56hAWA-FuGmhiuMptnKNk_dU3VnbyL6SbHrMWUbquxWjyoqsd7stFs1K_nW6XIzsTjh8Bg6hB5hmsSV-M5_hPS24JwJaCdMQeWrh6cIEp2Sjft7I1V4HQrgzrkMh15sDFAw3i1_ZZasQsDYKyYbO9Jp7lx42ognPrz_KuvPzLjEXvBBNTFsVXUE-ur5adLNMvt-uXzcJ1rcwhjHWItUf5YvgRQbbBnd9f-LsJIhfkDgCJcvZmGDZrtlCKaU1UjHv5c3faZED-cjL59MbibofhPjv87MK8hhdg";
-        const string TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoxMDAwMDAwMDAwfQ.JBmiZBgKVSUtB4_NhD1kiUhBTnH2ufGSzcoCwC3-Gtx0QDvkFjy2KbxIU9asscenSdzziTOZN6IfFx6KgZ3_a3YB7vdCgfSINQwrAK0_6Owa-BQuNAIsKk-pNoIhJ-OcckV-zrp5wWai3Ak5Qzg3aZ1NKZQKZt5ICZmsFZcWu_4pzS-xsGPcj5gSr3Iybt61iBnetrkrEbjtVZg-3xzKr0nmMMqe-qqeknozIFy2YWAObmTkrN4sZ3AB_jzqyFPXN-nMw3a0NxIdJyetbESAOcNnPLymBKZEZmX2psKuXwJxxekvgK9egkfv2EjKYF9atpH5XwC0Pd4EWvraLAL2eg";
+        const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20961002 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjo0MDAwMDAwMDAwfQ.wEkf8oi2H4ePTuRvAdDb9sA82wzwO-rQUP8O6CdIp6sp1eUDnfvljw35_n5NrghzVJzTy-C1Kqhb9OyTk5kbNouCFpfG9kWfxRIqEmSk1_X9Q6g9oMJtJ8VGvPcgnVZ_BA8d8t1wul1EaZrA0ydWuNxNaZ2vWvssHdkhHAWM9JeZ_MvHIvRR_QHYu_FEkwi0nA7xIJ3iW4Cjn4Jjhi_jLM4tnNlP0tBFDvM60qcfOf25hWZBOuSmAlpniQQPEN1_zE3owF486w2fJkQjNgvzsD7zRf6taXs_nQ-sWXNhxzY0R4bsgO1kUGXNSMG4uaaXbX_i4dOGuLKDD1sw-NXGDg";
+        const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoyMDAwMDAwMDAwfQ.C4shc2SZqolHSpxSLU3GykR0A0Zyh0fofqNirS3CmeY4ZerofgRry7m9AMFyn1SG-rmLDpFJIObFA2dn7nN6uKf5gCTEIwGAB71LfAeVaEfOeF1SvLJh3-qGXknqinsrX8tuBhoaHmpWpvdp0PW-8PmLuBq-D4GWBGyrP73sx_qQi322E2_PJGfudygbahdQ9v4SnBh7AOlaLKSXhGRT-qsMCxZJXpHM7cZsaBkOlo8x_LEWbbkf7Ub6q3mWaQsR30NlJVTaRMY9xWrRMV_iZocREg2EI33mMBa5zhuyQ-hXENp5M9FgS_9B-j3LpFJoJyVFZG2beBRxU8tnqKan3A";
+        const string TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOjEyMywidW5pcXVlX25hbWUiOiJ0ZXN0MUBleGFtcGxlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoxMDAwMDAwMDAwfQ.Ite0xcvR2yLyFuVSBpoXeyJiwW44rYGJPGSX6VH_mCHImovvHMlcqJZkJLFy7A7jdUWJRZy23E_7tBR_rSEz9DBisiVksPeNqjuM3auUSZkPrRIYz16RZzLahhVNF-101j4Hg0Q7ZJB4zcT2a9qgB00CtSejUKrLoVljGj6mUz-ejVY7mNvUs0EE6e3pq4sylz9HHw0wZMBkv29xj_iE_3jBGwAwifh2UMQuBP_TAo6IiMaCMxmbPdITNEmQfXXIG3yPw6KwRjDw_EWR_R6yWFhbXuLONsZQF6b9mfokW9PxQ5MNCgvXihWCYaAibJ62R3N0pyUuvpjOJfifwFFaRA";
 
         private readonly WebApplicationFactory<Startup> _factory;
         private readonly ITestOutputHelper _output;
@@ -89,9 +89,9 @@ namespace Doppler.BillingUser.Test
         [InlineData("/hello/anonymous", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
         [InlineData("/hello/anonymous", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.OK)]
         [InlineData("/hello/anonymous", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/hello/anonymous", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002, HttpStatusCode.OK)]
-        [InlineData("/hello/anonymous", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/hello/anonymous", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908, HttpStatusCode.OK)]
+        [InlineData("/hello/anonymous", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20961002, HttpStatusCode.OK)]
+        [InlineData("/hello/anonymous", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/hello/anonymous", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908, HttpStatusCode.OK)]
         public async Task GET_helloAnonymous_should_accept_any_token(string url, string token, HttpStatusCode expectedStatusCode)
         {
             // Arrange
@@ -113,8 +113,8 @@ namespace Doppler.BillingUser.Test
         [Theory]
         [InlineData("/hello/valid-token", HttpStatusCode.Unauthorized)]
         [InlineData("/hello/superuser", HttpStatusCode.Unauthorized)]
-        [InlineData("/accounts/test1@test.com/billing-information", HttpStatusCode.Unauthorized)]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", HttpStatusCode.Unauthorized)]
+        [InlineData("/accounts/test1@example.com/billing-information", HttpStatusCode.Unauthorized)]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", HttpStatusCode.Unauthorized)]
         public async Task GET_authenticated_endpoints_should_require_token(string url, HttpStatusCode expectedStatusCode)
         {
             // Arrange
@@ -136,32 +136,32 @@ namespace Doppler.BillingUser.Test
         [InlineData("/hello/valid-token", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
         [InlineData("/hello/valid-token", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
         [InlineData("/hello/valid-token", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/hello/valid-token", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/hello/valid-token", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/hello/valid-token", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/hello/valid-token", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
         [InlineData("/hello/superuser", TOKEN_EMPTY, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
         [InlineData("/hello/superuser", TOKEN_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
         [InlineData("/hello/superuser", TOKEN_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
         [InlineData("/hello/superuser", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
         [InlineData("/hello/superuser", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
         [InlineData("/hello/superuser", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/hello/superuser", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/hello/superuser", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_EMPTY, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/billing-information", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_EMPTY, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/hello/superuser", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/hello/superuser", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_EMPTY, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/billing-information", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_EMPTY, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
         public async Task GET_authenticated_endpoints_should_require_a_valid_token(string url, string token, HttpStatusCode expectedStatusCode, string error, string extraErrorInfo)
         {
             // Arrange
@@ -187,7 +187,7 @@ namespace Doppler.BillingUser.Test
         [InlineData("/hello/valid-token", TOKEN_EXPIRE_20330518, HttpStatusCode.OK)]
         [InlineData("/hello/valid-token", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
         [InlineData("/hello/valid-token", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/hello/valid-token", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/hello/valid-token", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
         public async Task GET_helloValidToken_should_accept_valid_token(string url, string token, HttpStatusCode expectedStatusCode)
         {
             // Arrange
@@ -209,7 +209,7 @@ namespace Doppler.BillingUser.Test
         [Theory]
         [InlineData("/hello/superuser", TOKEN_EXPIRE_20330518, HttpStatusCode.Forbidden)]
         [InlineData("/hello/superuser", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/hello/superuser", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/hello/superuser", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
         public async Task GET_helloSuperUser_should_require_a_valid_token_with_isSU_flag(string url, string token, HttpStatusCode expectedStatusCode)
         {
             // Arrange
@@ -251,13 +251,13 @@ namespace Doppler.BillingUser.Test
         [Theory]
         [InlineData("/accounts/123/hello", TOKEN_EXPIRE_20330518, HttpStatusCode.Forbidden)]
         [InlineData("/accounts/123/hello", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/456/hello", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/test1@test.com/hello", TOKEN_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/test1@test.com/hello", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/test2@test.com/hello", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.Forbidden)]
-        [InlineData("/accounts/test2@test.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/456/hello", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/test1@example.com/hello", TOKEN_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/test1@example.com/hello", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/test2@example.com/hello", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.Forbidden)]
+        [InlineData("/accounts/test2@example.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.Forbidden)]
         public async Task GET_account_endpoint_should_require_a_valid_token_with_isSU_flag_or_a_token_for_the_right_account(string url, string token, HttpStatusCode expectedStatusCode)
         {
             // Arrange
@@ -278,11 +278,11 @@ namespace Doppler.BillingUser.Test
 
         [Theory]
         [InlineData("/accounts/123/hello", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/accounts/123/hello", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/accounts/test1@test.com/hello", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/accounts/test1@test.com/hello", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
-        [InlineData("/accounts/test1@test.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/accounts/123/hello", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/accounts/test1@example.com/hello", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/accounts/test1@example.com/hello", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/accounts/test1@example.com/payment-methods/current", TOKEN_ACCOUNT_123_TEST1_AT_EXAMPLE_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
         public async Task GET_account_endpoint_should_accept_valid_token_with_isSU_flag_or_a_token_for_the_right_account(string url, string token, HttpStatusCode expectedStatusCode)
         {
             // Arrange

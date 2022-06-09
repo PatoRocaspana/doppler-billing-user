@@ -25,7 +25,7 @@ namespace Doppler.BillingUser.Test
                 PlanId = 1,
                 DiscountId = 3
             };
-            var accountname = "test@mail.com";
+            var accountname = "test@example.com";
 
             var factory = new PerBaseUrlFlurlClientFactory();
             var service = new AccountPlansService(
@@ -39,7 +39,7 @@ namespace Doppler.BillingUser.Test
             httpTest.RespondWithJson(new { total = 2 });
 
             var isValid = await service.IsValidTotal(accountname, agreement);
-            const string url = "https://localhost:5000/accounts/test%40mail.com/newplan/1/calculate?discountId=3";
+            const string url = "https://localhost:5000/accounts/test%40example.com/newplan/1/calculate?discountId=3";
 
             // Assert
             Assert.True(isValid);
@@ -59,7 +59,7 @@ namespace Doppler.BillingUser.Test
                 PlanId = 1,
                 DiscountId = 3
             };
-            var accountname = "test@mail.com";
+            var accountname = "test@example.com";
 
             var factory = new PerBaseUrlFlurlClientFactory();
             var service = new AccountPlansService(
@@ -72,7 +72,7 @@ namespace Doppler.BillingUser.Test
 
             // Act
             var isValid = await service.IsValidTotal(accountname, agreement);
-            const string url = "https://localhost:5000/accounts/test%40mail.com/newplan/1/calculate?discountId=3";
+            const string url = "https://localhost:5000/accounts/test%40example.com/newplan/1/calculate?discountId=3";
 
             // Assert
             Assert.False(isValid);
@@ -93,7 +93,7 @@ namespace Doppler.BillingUser.Test
                 PlanId = 1,
                 DiscountId = 3
             };
-            var accountname = "test@mail.com";
+            var accountname = "test@example.com";
 
             var factory = new PerBaseUrlFlurlClientFactory();
             var service = new AccountPlansService(
