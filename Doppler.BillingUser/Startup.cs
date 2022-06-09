@@ -22,6 +22,7 @@ using Doppler.BillingUser.ExternalServices.Zoho;
 using Doppler.BillingUser.Services;
 using Doppler.BillingUser.ExternalServices.MercadoPagoApi;
 using Doppler.BillingUser.Mappers.PaymentStatus;
+using Doppler.BillingUser.ExternalServices.Mercadopago;
 
 namespace Doppler.BillingUser
 {

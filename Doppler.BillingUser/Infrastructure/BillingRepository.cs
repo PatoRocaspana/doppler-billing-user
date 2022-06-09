@@ -1,14 +1,12 @@
 using Dapper;
 using Doppler.BillingUser.Encryption;
 using Doppler.BillingUser.Enums;
-using Doppler.BillingUser.ExternalServices.FirstData;
 using Doppler.BillingUser.ExternalServices.Sap;
 using Doppler.BillingUser.Model;
 using Doppler.BillingUser.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -20,7 +18,7 @@ namespace Doppler.BillingUser.Infrastructure
     {
         private readonly IDatabaseConnectionFactory _connectionFactory;
         private readonly IEncryptionService _encryptionService;
-        private readonly IPaymentGateway _paymentGateway;
+        private readonly ExternalServices.FirstData.IPaymentGateway _paymentGateway;
         private readonly ISapService _sapService;
 
         private const int InvoiceBillingTypeQBL = 1;
@@ -39,7 +37,7 @@ namespace Doppler.BillingUser.Infrastructure
 
         public BillingRepository(IDatabaseConnectionFactory connectionFactory,
             IEncryptionService encryptionService,
-            IPaymentGateway paymentGateway,
+            ExternalServices.FirstData.IPaymentGateway paymentGateway,
             ISapService sapService)
         {
             _connectionFactory = connectionFactory;
@@ -236,7 +234,7 @@ WHERE
 
             if (paymentMethod.PaymentMethodName == PaymentMethodEnum.CC.ToString())
             {
-                var creditCard = new CreditCard
+                var creditCard = new ExternalServices.FirstData.CreditCard
                 {
                     Number = _encryptionService.EncryptAES256(paymentMethod.CCNumber.Replace(" ", "")),
                     HolderName = _encryptionService.EncryptAES256(paymentMethod.CCHolderFullName),
@@ -971,7 +969,7 @@ VALUES
     @idInvoiceBillingType,
     @accountEntryType,
     @authorizationNumber,
-    @paymentEntryType
+    @paymentEntryType,
     @idCurrencyType,
     @currencyRate,
     @taxes);

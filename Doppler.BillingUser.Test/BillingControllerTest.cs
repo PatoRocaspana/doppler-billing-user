@@ -118,7 +118,7 @@ namespace Doppler.BillingUser.Test
             paymentGatewayMock
                 .Setup(x => x.CreateCreditCardPayment(
                     It.IsAny<decimal>(),
-                    It.IsAny<CreditCard>(),
+                    It.IsAny<ExternalServices.FirstData.CreditCard>(),
                     It.IsAny<int>()))
                 .ReturnsAsync(authorizationNumber);
 

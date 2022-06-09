@@ -7,6 +7,8 @@ namespace Doppler.BillingUser
     {
         public PaymentErrorCode ErrorCode { get; private set; }
 
+        public string PaymentErrorKey { get; private set; }
+
         /// <summary>
         /// Creates an Application Error Code Exception.
         /// </summary>
@@ -17,6 +19,7 @@ namespace Doppler.BillingUser
             : base(errorCode + (message != null ? " - " + message : ""), innerException)
         {
             ErrorCode = errorCode;
+            PaymentErrorKey = message;
         }
     }
 }

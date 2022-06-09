@@ -102,7 +102,7 @@ namespace Doppler.BillingUser.Test
             encryptedMock.Setup(x => x.DecryptAES256(It.IsAny<string>())).Returns("TEST");
 
             var paymentGatewayMock = new Mock<IPaymentGateway>();
-            paymentGatewayMock.Setup(x => x.IsValidCreditCard(It.IsAny<CreditCard>(), It.IsAny<int>())).ReturnsAsync(true);
+            paymentGatewayMock.Setup(x => x.IsValidCreditCard(It.IsAny<ExternalServices.FirstData.CreditCard>(), It.IsAny<int>())).ReturnsAsync(true);
 
             var sapServiceMock = new Mock<ISapService>();
             sapServiceMock.Setup(x => x.SendUserDataToSap(It.IsAny<SapBusinessPartner>(), null));
@@ -288,7 +288,7 @@ namespace Doppler.BillingUser.Test
             encryptedMock.Setup(x => x.DecryptAES256(It.IsAny<string>())).Returns("TEST");
 
             var paymentGatewayMock = new Mock<IPaymentGateway>();
-            paymentGatewayMock.Setup(x => x.IsValidCreditCard(It.IsAny<CreditCard>(), It.IsAny<int>())).ReturnsAsync(false);
+            paymentGatewayMock.Setup(x => x.IsValidCreditCard(It.IsAny<ExternalServices.FirstData.CreditCard>(), It.IsAny<int>())).ReturnsAsync(false);
 
             var client = _factory.WithWebHostBuilder(builder =>
             {

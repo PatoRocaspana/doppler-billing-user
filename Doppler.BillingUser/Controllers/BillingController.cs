@@ -25,6 +25,7 @@ using Doppler.BillingUser.Services;
 using Doppler.BillingUser.Extensions;
 using Doppler.BillingUser.Mappers;
 using Doppler.BillingUser.Mappers.BillingCredit;
+using Doppler.BillingUser.ExternalServices.Mercadopago;
 
 namespace Doppler.BillingUser.Controllers
 {
@@ -50,6 +51,7 @@ namespace Doppler.BillingUser.Controllers
         private readonly IZohoService _zohoService;
         private readonly IEmailTemplatesService _emailTemplatesService;
         private readonly ICurrencyRepository _currencyRepository;
+        private readonly IMercadopagoService _mercadopagoService;
 
         private readonly JsonSerializerSettings settings = new JsonSerializerSettings
         {
@@ -96,7 +98,8 @@ namespace Doppler.BillingUser.Controllers
             IOptions<ZohoSettings> zohoSettings,
             IZohoService zohoService,
             IEmailTemplatesService emailTemplatesService,
-            ICurrencyRepository currencyRepository)
+            ICurrencyRepository currencyRepository,
+            IMercadopagoService mercadopagoService)
         {
             _logger = logger;
             _billingRepository = billingRepository;
@@ -116,6 +119,7 @@ namespace Doppler.BillingUser.Controllers
             _zohoService = zohoService;
             _emailTemplatesService = emailTemplatesService;
             _currencyRepository = currencyRepository;
+            _mercadopagoService = mercadopagoService;
         }
 
         [Authorize(Policies.OWN_RESOURCE_OR_SUPERUSER)]
@@ -329,7 +333,7 @@ namespace Doppler.BillingUser.Controllers
 
                 int invoiceId = 0;
                 string authorizationNumber = string.Empty;
-                CreditCard encryptedCreditCard = null;
+                Model.CreditCard encryptedCreditCard = null;
                 CreditCardPayment payment = null;
 
                 if (agreementInformation.Total.GetValueOrDefault() > 0 &&
@@ -490,12 +494,22 @@ namespace Doppler.BillingUser.Controllers
 
                 return new OkObjectResult("Successfully");
             }
+            catch (DopplerApplicationException e)
+            {
+                var messageError = $"Failed at creating new agreement for user {accountname} with exception {e.Message}";
+                _logger.LogError(e, messageError);
+                await _slackService.SendNotification(messageError);
+                return new ObjectResult($"Failed at creating new agreement: {e.PaymentErrorKey}")
+                {
+                    StatusCode = 500
+                };
+            }
             catch (Exception e)
             {
                 var messageError = $"Failed at creating new agreement for user {accountname} with exception {e.Message}";
                 _logger.LogError(e, messageError);
                 await _slackService.SendNotification(messageError);
-                return new ObjectResult("Failed at creating new agreement")
+                return new ObjectResult($"Failed at creating new agreement: {e.Message}")
                 {
                     StatusCode = 500,
                     Value = e.Message,
@@ -546,10 +560,40 @@ namespace Doppler.BillingUser.Controllers
             switch (paymentMethod)
             {
                 case PaymentMethodEnum.CC:
-                    var authorizationNumber = await _paymentGateway.CreateCreditCardPayment(total, encryptedCreditCard, userId);
+                    var firstDataCreditCard = new ExternalServices.FirstData.CreditCard
+                    {
+                        CardType = encryptedCreditCard.CardType,
+                        ExpirationMonth = encryptedCreditCard.ExpirationMonth,
+                        ExpirationYear = encryptedCreditCard.ExpirationYear,
+                        HolderName = encryptedCreditCard.HolderName,
+                        Number = encryptedCreditCard.Number,
+                        Code = encryptedCreditCard.Code
+                    };
+                    var authorizationNumber = await _paymentGateway.CreateCreditCardPayment(total, firstDataCreditCard, userId);
                     return new CreditCardPayment { Status = PaymentStatusEnum.Approved, AuthorizationNumber = authorizationNumber };
                 case PaymentMethodEnum.MP:
-                    return new CreditCardPayment { Status = PaymentStatusEnum.Pending, AuthorizationNumber = String.Empty };
+                    var user = await _userRepository.GetUserBillingInformation(accountname);
+                    var mercadopagoCreditCard = new ExternalServices.Mercadopago.CreditCard
+                    {
+                        Cardholder = new PaymentCardholder
+                        {
+                            Name = encryptedCreditCard.HolderName,
+                            Identification = new Identification
+                            {
+                                Number = user.Cuit,
+                                Type = "DNI"
+                            }
+                        },
+                        CardNumber = encryptedCreditCard.Number,
+                        ExpirationMonth = encryptedCreditCard.ExpirationMonth.ToString(),
+                        ExpirationYear = encryptedCreditCard.ExpirationYear.ToString(),
+                        SecurityCode = encryptedCreditCard.Code
+                    };
+
+                    var paymentResult = await _mercadopagoService.CreatePayment(accountname, total, mercadopagoCreditCard, encryptedCreditCard.CardType.ToString().ToLower());
+                    var status = paymentResult.Status == "approved" ? PaymentStatusEnum.Approved : PaymentStatusEnum.Pending;
+
+                    return new CreditCardPayment { Status = status, AuthorizationNumber = paymentResult.Id.ToString(), StatusDetails = paymentResult.StatusDetail };
                 default:
                     return new CreditCardPayment { Status = PaymentStatusEnum.Approved };
             }

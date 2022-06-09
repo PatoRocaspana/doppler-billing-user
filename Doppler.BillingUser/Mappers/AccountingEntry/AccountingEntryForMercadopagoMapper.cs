@@ -1,5 +1,4 @@
 using Doppler.BillingUser.Enums;
-using Doppler.BillingUser.ExternalServices.FirstData;
 using Doppler.BillingUser.Infrastructure;
 using Doppler.BillingUser.Model;
 using Doppler.BillingUser.Utils;
